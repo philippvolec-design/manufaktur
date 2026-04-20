@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AGB – Lebkuchenmanufaktur Woletz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --amber: #B87820;
+            --text-dark: #2B1207;
+            --text-mid: #5C3010;
+            --cream: #FBF5E8;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-dark);
+            background: #EDEAE3;
+            overflow-x: hidden;
+        }
+
+        /* ── NAV ── */
+        nav {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 200;
+            height: 68px;
+            display: flex;
+            align-items: stretch;
+            background-color: #3C1D0A;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
+                    transparent      1px, transparent      7px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
+                    transparent      1px, transparent      7px
+                ),
+                linear-gradient(to right,
+                    #180804 0%,
+                    #3C1C09 20%,
+                    #6B3212 50%,
+                    #3C1C09 80%,
+                    #180804 100%
+                );
+            box-shadow: 0 3px 16px rgba(0,0,0,0.55);
+        }
+
+        nav::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(180deg,
+                #9A6018 0%,
+                #D4A840 35%,
+                #EDD5A0 55%,
+                #EDD5A0 100%
+            );
+            pointer-events: none;
+        }
+
+        .nav-inner {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            text-decoration: none;
+        }
+
+        .nav-brand img {
+            height: 42px;
+            width: auto;
+            flex-shrink: 0;
+        }
+
+        .nav-brand-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-weight: 400;
+            color: #E8D0A0;
+            letter-spacing: 0.03em;
+            white-space: nowrap;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 2.8rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.03em;
+            color: #E8D0A0;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover { color: #F5E4BE; }
+
+        /* ── CONTENT ── */
+        .page-wrap {
+            padding-top: 68px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-strip {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem 3rem;
+            box-shadow:
+                inset 0  1px 0 0 #EDD5A0,
+                inset 0  3px 0 0 #C89030,
+                inset 0 -1px 0 0 #EDD5A0,
+                inset 0 -3px 0 0 #C89030;
+            background:
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0,0,0,0.10) 0px, rgba(0,0,0,0.10) 1px,
+                    transparent      1px, transparent      7px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0,0,0,0.10) 0px, rgba(0,0,0,0.10) 1px,
+                    transparent      1px, transparent      7px
+                ),
+                linear-gradient(to right,
+                    #180804 0%,
+                    #3C1C09 20%,
+                    #6B3212 50%,
+                    #3C1C09 80%,
+                    #180804 100%
+                );
+        }
+
+        .page-strip h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.25rem;
+            font-weight: 400;
+            color: #E8D5B0;
+            letter-spacing: 0.02em;
+        }
+
+        .agb-body {
+            flex: 1;
+            max-width: 780px;
+            margin: 0 auto;
+            padding: 4rem 3rem 5rem;
+        }
+
+        .agb-section {
+            margin-bottom: 2.4rem;
+        }
+
+        .agb-section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #2B1A0E;
+            margin-bottom: 0.75rem;
+            padding-bottom: 0.45rem;
+            border-bottom: 1px solid #D4BFA0;
+            letter-spacing: 0.01em;
+        }
+
+        .agb-section p {
+            font-size: 0.88rem;
+            line-height: 1.9;
+            color: var(--text-mid);
+            margin-bottom: 0.65rem;
+        }
+
+        .agb-section p:last-child { margin-bottom: 0; }
+
+        /* ── FOOTER ── */
+        footer {
+            position: relative;
+            background-color: #3C1D0A;
+            background-image:
+                repeating-linear-gradient(
+                    45deg,
+                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
+                    transparent      1px, transparent      7px
+                ),
+                repeating-linear-gradient(
+                    -45deg,
+                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
+                    transparent      1px, transparent      7px
+                ),
+                linear-gradient(to right,
+                    #180804 0%,
+                    #3C1C09 20%,
+                    #6B3212 50%,
+                    #3C1C09 80%,
+                    #180804 100%
+                );
+            box-shadow: 0 -3px 16px rgba(0,0,0,0.45);
+            padding: 2.5rem 3rem;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(180deg,
+                #EDD5A0 0%,
+                #EDD5A0 45%,
+                #D4A840 65%,
+                #9A6018 100%
+            );
+            pointer-events: none;
+        }
+
+        .footer-bottom {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-nav {
+            list-style: none;
+            display: flex;
+            gap: 2.2rem;
+        }
+
+        .footer-nav a {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.9rem;
+            color: #E8D0A0;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            transition: color 0.2s;
+        }
+
+        .footer-nav a:hover { color: #F5E4BE; }
+
+        @media (max-width: 720px) {
+            .nav-inner { padding: 0 1.5rem; }
+            .nav-links { gap: 1.4rem; }
+            .agb-body { padding: 3rem 1.8rem 4rem; }
+            .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
+        }
+
+        @media (max-width: 520px) {
+            .nav-brand-name { font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+            <img src="logo.png" alt="Woletz Logo">
+            <span class="nav-brand-name">Woletz Lebkuchen-Manufaktur</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#produkte">Produkte</a></li>
+            <li><a href="index.html#ueber-uns">Über uns</a></li>
+            <li><a href="index.html#kontakt">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-wrap">
+
+    <div class="page-strip">
+        <h1>Allgemeine Geschäftsbedingungen</h1>
+    </div>
+
+    <main class="agb-body">
+
+        <div class="agb-section">
+            <h2>§ 1 Geltung der Bedingungen</h2>
+            <p>Die Lieferungen, Leistungen und Angebote der Woletz-Lebkuchen-Manufaktur, nachfolgend Verkäuferin, erfolgen ausschließlich aufgrund dieser Geschäftsbedingungen. Spätestens mit der Entgegennahme der Ware gelten diese Bedingungen als angenommen.</p>
+            <p>Anders lautende Geschäftsbedingungen des Käufers sind nur wirksam, wenn sie von der Verkäuferin schriftlich bestätigt werden. Das Gleiche gilt für Änderungen und Ergänzungen dieser AGB. Mündliche Zusagen und Nebenabreden bedürfen ebenso der schriftlichen Bestätigung durch die Verkäuferin.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 2 Angebot und Vertragsschluß</h2>
+            <p>1. Die Angebote der Verkäuferin sind freibleibend und unverbindlich. Annahmeerklärungen und sämtliche Bestellungen bedürfen der Rechtswirksamkeit der schriftlichen Bestätigung der Verkäuferin. Das Gleiche gilt für Ergänzungen, Abänderungen und Nebenabreden.</p>
+            <p>2. Zeichnungen, Abbildungen, Maße, Gewichte, Bemalungen und sonstige Leistungsdaten sind nur verbindlich, wenn dies ausdrücklich schriftlich vereinbart wird. Abweichungen entsprechen hier dem handwerklichen Charakter. Eine Eigenschaft gilt nur dann als zugesichert, wenn sie schriftlich bestätigt wird.</p>
+            <p>3. Die Verkaufsangestellten der Verkäuferin sind nicht befugt, mündliche Nebenabreden zu treffen oder mündliche Zusicherungen zu geben, die über den Inhalt des schriftlichen Vertrages hinausgehen.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 3 Preise</h2>
+            <p>1. Soweit nicht anders angegeben ist, hält sich die Verkäuferin an die in ihren Angeboten enthaltenen Preise, 14 Tage ab deren Datum gebunden. Maßgebend sind die in der Auftragsbestätigung der Verkäuferin genannten Preise zuzüglich der jeweiligen gesetzlichen Mehrwertsteuer. Zusätzliche Lieferungen und Leistungen werden gesondert berechnet.</p>
+            <p>2. Die Preise verstehen sich, falls nicht anders vereinbart wurde, zzgl. Sonderverpackung, Transport, Frachtversicherung zzgl. der jeweils am Auslieferungstag gültigen Mehrwertsteuer.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 4 Urheberrecht</h2>
+            <p>1. Die Verkäuferin hat das Urheberrecht in ist Inhaber des geistigen Eigentums aller von ihr erstellten Gebäckmuster oder digitaler Muster. Abbildungen von gefertigten Mustern oder gefertigter Produkte kann die Verkäuferin in Verkaufsunterlagen und auf ihrer Internetseite abbilden.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 5 Liefer- und Leistungszeit</h2>
+            <p>1. Liefertermin oder Fristen, die verbindlich oder unverbindlich vereinbart werden können, bedürfen der Schriftform.</p>
+            <p>2. Vereinbarte Liefertermine gelten als eingehalten, wenn das Vertragsprodukt zum vereinbarten Liefertermin dem Frachtführer übergeben wurde. Verzögert sich die Versendung versandbereiter Waren oder die Abholung von für den Käufer bereitgestellten Waren aus Gründen, die nicht von der Verkäuferin zu vertreten sind, so können die Vertragsprodukte auf Kosten und Gefahr des Kunden eingelagert werden.</p>
+            <p>3. Liefer- und Leistungsverzögerungen aufgrund höherer Gewalt und aufgrund von Ereignissen, die der Verkäuferin die Lieferung wesentlich erschweren oder unmöglich machen - hierzu gehören insbesondere Streik, Aussperrung, behördliche Anordnung usw. -, auch wenn diese bei Lieferanten der Verkäuferin oder deren Unterlieferanten eingetreten sind, hat die Verkäuferin auch bei verbindlich vereinbarten Fristen und Terminen nicht zu vertreten. Sie berechtigen die Verkäuferin, die Lieferung oder Leistung um die Dauer der Behinderung zzgl. einer angemessenen Anlaufzeit hinauszuschieben oder wegen des noch nicht erfüllten Teils ganz oder teilweise vom Vertrag zurückzutreten. Dies gilt auch, wenn die Verkäuferin sich zum Zeitpunkt des Eintritts des Hindernisses bereits im Verzug befand. Sollte die Verkäuferin mit einer Lieferung mehr als 4 Wochen in Verzug geraten, kann der Kunde nach einer schriftlich gesetzten angemessenen Nachfrist unter Ausschluß weiterer Ansprüche vom Vertrag zurücktreten. In keinem oder bezeichneten Fall kann der Käufer aus der Verlängerung der Lieferzeit oder eines Rücktritts der Verkäuferin Schadenersatzansprüche herleiten.</p>
+            <p>4. Das Recht zu Teillieferungen und deren Fakturierung bleibt der Verkäuferin ausdrücklich vorbehalten.</p>
+            <p>5. Sofern nichts anderes vereinbart wurde, ist die Verkäuferin berechtigt, aber nicht verpflichtet, die zu versendende Ware auf Kosten des Käufers gegen Transportgefahren aller Art zu versichern. Die Regelung des Gefahrenübergangs bleibt hiervon unberührt.</p>
+            <p>6. Die Verkäuferin ist zur Einhaltung von Fristen und Terminen nur verpflichtet, wenn der Käufer seine vertraglichen Pflichten, insbesondere seine Zahlungsverpflichtungen rechtzeitig und vollständig erfüllt. Befindet sich der Käufer in Verzug, so verlängert sich eine vereinbarte Frist oder ein vereinbarter Termin um einen der Dauer des Verzuges entsprechenden Zeitraum.</p>
+            <p>7. Falls der Käufer bestätigte Bestellungen ganz oder teilweise storniert, kann die Verkäuferin ohne gesonderten Nachweis Schadenersatz in Höhe von 25 % des Nettowertes der betroffenen Bestellung geltend machen. Dem Käufer bleibt unbenommen, einen geringeren Schaden nachzuweisen, der Verkäuferin, einen höheren Schaden geltend zu machen. Befindet sich der Käufer in Annahmeverzug, so hat die Verkäuferin das Recht, vom Vertrag zurückzutreten.</p>
+            <p>8. Die Verkäuferin kann schadenersatzfrei vom Vertrag zurücktreten, wenn die Zahlungsfähigkeit des Bestellers - Käufers nachweislich zweifelhaft wird.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 6 Liefermenge</h2>
+            <p>Sichtbare Mengendifferenzen müssen sofort bei Warenerhalt, verdeckte Mengendifferenzen innerhalb von 4 Tagen nach Warenerhalt der Verkäuferin und dem Frachtführer schriftlich angezeigt werden. Die Übernahme der Ware durch den Spediteur oder Transporteur gilt als Beweis für die Menge, einwandfreie Verpackung und Verladung der gekauften Ware.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 7 Gefahrenübergang</h2>
+            <p>Die Gefahr geht auf den Käufer über, sobald die Sendung an die den Transport ausführende Person übergeben worden ist oder zwecks Versendung das Lager der Verkäuferin verlassen hat. Falls der Versand ohne Verschulden von Seiten der Verkäuferin unmöglich oder verzögert wird, geht die Gefahr mit Herstellung der Versandbereitschaft auf den Käufer über. Hat die Verkäuferin es übernommen, die Ware selbst zu transportieren, geht die Gefahr mit der Anlieferung (Ankunft auf dem Betriebsgrundstück des Käufers) auf den Käufer über.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 8 Übergabe bzw. Abnahme</h2>
+            <p>Die gekaufte Ware wird durch den Spediteur oder Frachtführer dem Käufer übergeben. Hat es die Verkäuferin übernommen, die Ware selbst zum Betriebsgrundstück des Käufers zu transportieren, so erfolgt die Übergabe durch Einräumung des Besitzers an den Käufer. Einer Annahme bedarf es nicht.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 9 Gewährleistung</h2>
+            <p>1. Die Gewährleistung erstreckt sich darauf, dass verkaufte Ware nach dem Stand handwerksüblicher Maßstäbe frei von Fabrikations- und Rohstoffmängeln ist.</p>
+            <p>2. Die Auswahl der Produkte hat der Käufer selbst getroffen. Der Verkäuferin ist nicht bekannt, welche konkrete Verwendung der Käufer für die gekauften Produkte hat. Die Verkäuferin übernimmt keine Haftung für die Auswahl und Eignung der gekauften Produkte.</p>
+            <p>3. Die Gewährleistungsfrist beginnt mit der Übergabe der gekauften Ware. Der Käufer muß der Verkäuferin etwaige Mängel unverzüglich, spätestens jedoch innerhalb einer Woche nach Empfang der gekauften Ware schriftlich mitteilen.</p>
+            <p>4. Die Gewährleistung umfaßt nach Wahl der Verkäuferin Wandlung oder Stellung eines gleichartigen Ersatzproduktes.</p>
+            <p>5. Gewährleistungsansprüche gegen die Verkäuferin stehen nur dem unmittelbaren Käufer zu und sind nicht abtretbar.</p>
+            <p>6. Mängel, die auf unsachgemäße Lagerung beim Käufer bzw. Transport zurückzuführen sind, bleiben von der Gewährleistung ausgeschlossen. Im übrigen gelten die Vereinbarungen gemäß § 6.</p>
+            <p>7. Die vorstehenden Absätze enthalten abschließend die Gewährleistung für die gekaufte Ware und schließen sonstige Gewährleistungsansprüche jeglicher Art aus, sofern nicht zwischen den Parteien gesonderte Vereinbarungen wirksam zustande gekommen sind.</p>
+            <p>8. Geringe Farbtonabweichungen sind kein Reklamationsgrund.</p>
+            <p>9. Konsistenzveränderungen nach Warenannahme sind kein Reklamationsgrund.</p>
+            <p>10. Mehr- oder Minderlieferungen von bis zu 2% sind möglich.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 10 Sonstige Haftung (insb. Mangelfolgeschäden)</h2>
+            <p>Weitergehende Ansprüche gegen die Verkäuferin, ihre gesetzlichen Vertreter oder Verrichtungs- bzw. Erfüllungsgehilfen, gleich aus welchem Rechtsgrund, insbesondere aus Verzug oder Nichterfüllung, Verschulden bei Vertragsabschluss, positiver Forderungsverletzung, deliktischer Haftung für Rat oder Auskunft, sind ausgeschlossen. Dies gilt nicht für den Fall, dass die Pflichtverletzung auf Vorsatz oder grober Fahrlässigkeit der Verkäuferin beruht. In jedem Fall ist die Haftung dem Umfang und der Höhe nach auf vorhersehbare Schäden begrenzt. Die Haftung der Erfüllungsgehilfen der Verkäuferin, die nicht leitende Angestellte sind, ist gegenüber Vollkaufleuten auch bei grober Fahrlässigkeit ausgeschlossen, es sei denn, es handelt sich um die Verletzung einer vertraglichen Hauptpflicht.</p>
+            <p>Eine Haftung ist in jedem Fall auf das einfache des Vertragswertes des den Schaden verursachenden Teils des Vertragsgegenstandes begrenzt. Die Haftung nach dem Produkthaftungsgesetz bzw. sonstigen zwingenden Bestimmung bleibt unberührt.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 11 Eigentumsvorbehalt</h2>
+            <p>1. Bis zur Erfüllung aller Forderungen (einschließlich sämtlicher Saldoforderungen aus Kontokorrent), die der Verkäuferin aus jedem Rechtsgrund gegen den Käufer jetzt oder zukünftig zustehen, wird der Verkäuferin die folgende Sicherheit gewährt, die sie auf Verlangen nach ihrer Wahl freigeben wird, soweit sie die Forderungen nachhaltig um mehr als 20 % übersteigt.</p>
+            <p>2. Die Ware bleibt bis zur vollständigen Bezahlung des Kaufpreises Eigentum der Verkäuferin. Verarbeitung oder Umbildung erfolgen stets für die Verkäuferin als Hersteller, jedoch ohne Verpflichtung für diese. Erlischt das Miteigentum der Verkäuferin durch Verbindung, so wird bereits jetzt vereinbart, daß das Miteigentum des Käufers an der einheitlichen Sache wertanteilsmäßig (Rechnungswert) auf die Verkäuferin übergeht. Der Käufer verwahrt die im Miteigentum der Verkäuferin stehenden Sache für diese.</p>
+            <p>3. Der Käufer ist berechtigt, die Vorbehaltsware im ordnungsgemäßen Geschäftsverkehr zu verarbeiten und zu veräußern, solange er nicht in Verzug ist. Verpfändungen und Sicherheitsübereignungen sind unzulässig. Die aus dem Weiterverkauf oder einem sonstigen Rechtsgrund (Versicherung, unerlaubter Handlung) bezüglich der Vorbehaltsware entstehende Forderung (einschließlich sämtlicher Saldoforderungen aus Kontokorrent) tritt der Käufer bereits jetzt sicherungshalber in vollem Umfang an die Verkäuferin ab. Die Verkäuferin ermächtigt den Käufer widerruflich, die an sie abgetretenen Forderungen für dessen Rechnung im eigenen Namen einzuziehen. Die Einzugsermächtigung kann nur widerrufen werden, wenn der Käufer seinen Zahlungsverpflichtungen nicht ordnungsgemäß nachkommt. Bei Zugriffen Dritter auf die Vorbehaltsware wird der Käufer auf das Eigentum der Verkäuferin hinweisen und diese unmittelbar benachrichtigen.</p>
+            <p>4. Bei vertragswidrigem Verhalten des Käufers - insbesondere Zahlungsverzug - ist die Verkäuferin berechtigt, die Vorbehaltsware zurückzunehmen oder gegebenenfalls Abtretung der Herausgabeansprüche des Käufers gegen Dritte zu verlangen. In der Zurücknahme sowie der Pfändung der Vorbehaltsware durch die Verkäuferin liegt kein Rücktritt vom Vertrag.</p>
+            <p>5. Bei Zahlungsverzug darf die Verkäuferin zur Geltendmachung des Eigentumsvorbehalts an der Vorbehaltsware die Geschäftsräume des Käufers betreten und die Vorbehaltsware an sich nehmen.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 12 Zahlung</h2>
+            <p>1. Rechnungen sind, soweit nicht anders schriftlich vereinbart wurde, bei Übergabe bar zu bezahlen.</p>
+            <p>2. Ist vereinbart, dass der Rechnungsbetrag nicht bei Übergabe zu zahlen ist, so ist der Betrag 14 Tage nach Rechnungsstellung ohne jeden Abzug fällig, soweit nichts anderes vereinbart worden ist. Rechnungsstellung erfolgt mit der Lieferung.</p>
+            <p>3. Bei Überschreitung der Zahlungstermine steht der Verkäuferin ohne weitere Mahnung ein Anspruch auf Verzugszinsen in Höhe von 5 % über dem jeweils gültigen Diskontsatz der Deutschen Bundesbank zu. Das Recht zur Geltendmachung eines dafür hinausgehenden Verzugsschadens bleibt unberührt.</p>
+            <p>4. Wenn der Käufer seinen Zahlungsverpflichtungen nicht nachkommt, insbesondere einen Scheck nicht einlöst, oder seine Zahlungen einstellt oder wenn der Verkäuferin andere Umstände bekannt werden, die die Kreditwürdigkeit des Käufers in Frage stellen, so ist die Verkäuferin berechtigt, die gesamte Restschuld fällig zu stellen. Sie ist in diesem Fall außerdem berechtigt, Vorauszahlungen oder Sicherheitsleistungen zu verlangen.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 13 Abtretung und Verbot von Gestaltungsrechten</h2>
+            <p>Die Abtretung von Forderungen gegen die Verkäuferin an Dritte ist ausgeschlossen, sofern diese der Abtretung nicht ausdrücklich schriftlich zustimmt.</p>
+            <p>Der Käufer ist zur Aufrechnung, Zurückhaltung oder Minderung nur berechtigt, wenn die Gegenansprüche rechtskräftig festgestellt wurden oder unstreitig sind. Das gilt auch dann, wenn Mängelrügen oder Gegenansprüche geltend gemacht werden.</p>
+        </div>
+
+        <div class="agb-section">
+            <h2>§ 14 Anwendbares Recht, Erfüllungsort, Gerichtsstand</h2>
+            <p>1. Für die Geschäftsbedingungen und die gesamten Rechtsbeziehungen zwischen der Verkäuferin und dem Käufer gilt das Recht der Bundesrepublik Deutschland.</p>
+            <p>2. Soweit der Käufer Vollkaufmann im Sinne des Handelsgesetzbuches, juristische Personen des öffentlichen Rechts oder öffentlich-rechtliches Sondervermögen ist, ist Dresden ausschließlicher Gerichtsstand für alle sich aus diesem Vertragsverhältnis unmittelbar ergebenen Streitigkeiten. Erfüllungsort für die Lieferung der Ware ist Seifhennersdorf.</p>
+            <p>3. Die Bestimmungen des einheitlichen Kaufgesetzes und des einheitlichen UN-Kaufrechts (CISG) bzw. einheitlichen Vertragsschlussgesetz finden auf diesem Weg keine Anwendung.</p>
+            <p>4. Sollten eine oder mehrere Bestimmungen dieser Allgemeinen Geschäftsbedingungen unwirksam sein oder dieser Vertragstext eine Regelungslücke enthalten, so werden die Vertragsparteien die unwirksame oder unvollständige Bestimmung durch eine angemessene Regelung ersetzen oder ergänzen, die dem wirtschaftlichen Zweck der unwirksamen bzw. lückenhaften Regelung weitestgehend entspricht. Die Wirksamkeit der sonstigen Bestimmungen oder Vereinbarungen bleiben unberührt.</p>
+        </div>
+
+    </main>
+
+    <footer>
+        <div class="footer-bottom">
+            <ul class="footer-nav">
+                <li><a href="index.html#produkte">Produkte</a></li>
+                <li><a href="index.html#kontakt">Kontakt</a></li>
+                <li><a href="impressum.html">Impressum</a></li>
+                <li><a href="agb.html">AGB</a></li>
+            </ul>
+        </div>
+    </footer>
+
+</div>
+
+</body>
+</html>

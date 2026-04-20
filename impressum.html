@@ -251,24 +251,22 @@
             justify-content: space-between;
         }
 
-        .footer-brand {
+        .footer-nav {
+            list-style: none;
             display: flex;
-            align-items: center;
-            gap: 9px;
-            text-decoration: none;
+            gap: 2.2rem;
         }
 
-        .footer-brand span {
+        .footer-nav a {
             font-family: 'Playfair Display', serif;
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             color: #E8D0A0;
+            text-decoration: none;
+            letter-spacing: 0.03em;
+            transition: color 0.2s;
         }
 
-        .footer-copy {
-            font-size: 0.62rem;
-            color: rgba(232, 208, 160, 0.5);
-            letter-spacing: 0.08em;
-        }
+        .footer-nav a:hover { color: #F5E4BE; }
 
         @media (max-width: 720px) {
             .nav-inner { padding: 0 1.5rem; }
@@ -336,7 +334,13 @@
 
     <footer>
         <div class="footer-bottom">
-            </div>
+            <ul class="footer-nav">
+                <li><a href="index.html#produkte">Produkte</a></li>
+                <li><a href="index.html#kontakt">Kontakt</a></li>
+                <li><a href="impressum.html">Impressum</a></li>
+                <li><a href="agb.html">AGB</a></li>
+            </ul>
+        </div>
     </footer>
 
 </div>
