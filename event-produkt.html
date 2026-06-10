@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Woletz Lebukchen Manufaktur</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body { background: #FFFFFF; min-height: 100vh; display: flex; flex-direction: column; }
+
+        /* ─── MAIN CONTENT ─── */
+        main {
+            flex: 1;
+            padding-top: calc(68px + 4rem);
+            padding-bottom: 5rem;
+        }
+
+        .product-detail {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 3rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 5rem;
+        }
+
+        /* Linke Seite: Bild-Kachel */
+        .detail-img-wrap {
+            flex: 0 0 560px;
+            background: #efebea;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.09);
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2.5rem;
+        }
+        .detail-img-wrap img {
+            max-width: 100%;
+            max-height: 100%;
+            width: auto;
+            height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Rechte Seite: Info */
+        .detail-info {
+            flex: 1;
+            padding-top: 0.5rem;
+        }
+        .detail-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.8rem, 2.8vw, 2.6rem);
+            font-weight: 400;
+            color: #2e1a0e;
+            line-height: 1.25;
+            margin-bottom: 2rem;
+            letter-spacing: -0.01em;
+        }
+
+        /* Tabelle */
+        .spec-table-wrap {
+            border: 1px solid #C8C0B4;
+            border-radius: 6px;
+            overflow: hidden;
+        }
+        .spec-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .spec-table tr {
+            border-bottom: 1px solid #D8D0C4;
+        }
+        .spec-table tr:last-child {
+            border-bottom: none;
+        }
+        .spec-table td {
+            padding: 0.8rem 1.1rem;
+            font-size: 0.95rem;
+            color: #3a2010;
+            vertical-align: middle;
+        }
+        .spec-table td:first-child {
+            width: 50%;
+            color: #5C3010;
+            border-right: 1px solid #D8D0C4;
+        }
+        .spec-table tr:first-child td {
+            font-weight: 600;
+            color: #2B1207;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 1100px) {
+            .product-detail { flex-direction: column; gap: 2.5rem; align-items: center; }
+            .detail-img-wrap { flex: unset; width: 100%; max-width: 500px; }
+            .detail-info { padding-top: 0; width: 100%; }
+        }
+        @media (max-width: 600px) {
+            .product-detail { padding: 0 1.2rem; }
+            .nav-inner { padding: 0 1.5rem; }
+            .nav-links { gap: 1.4rem; }
+            .nav-brand-name { font-size: 0.82rem; }
+            .footer-nav { gap: 1.4rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+            <img src="logo.png" alt="Woletz Logo">
+            <span class="nav-brand-name">Woletz Lebkuchen-Manufaktur</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html#produkte">Produkte</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- PRODUKT DETAIL -->
+<main>
+    <div class="product-detail">
+        <div class="detail-img-wrap">
+            <img id="prod-img" src="" alt="">
+        </div>
+        <div class="detail-info">
+            <h1 class="detail-title" id="prod-title"></h1>
+            <div class="spec-table-wrap">
+                <table class="spec-table" id="prod-table"></table>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="kontakt">
+    <div class="footer-bottom">
+        <ul class="footer-nav">
+            <li><a href="index.html#produkte">Produkte</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+            <li><a href="agb.html">AGB</a></li>
+        </ul>
+    </div>
+</footer>
+
+<script>
+    const products = {
+        '10': {
+            title: 'Lebkuchenherz\nmit essbarem Logo',
+            img:   'event/Bild1.png',
+            specs: [
+                ['Artikelnummer', '10001'],
+                ['Größe',         '10 x 10 cm'],
+                ['Gewicht',       '50 g'],
+                ['Haltbarkeit',   '6 Monate'],
+                ['Lieferzeit',    '2 Wochen'],
+                ['Verpackungseinheit', '60 Stück']
+            ]
+        },
+        '14': {
+            title: 'Lebkuchenherz\nmit essbarem Logo',
+            img:   'event/Bild2.png',
+            specs: [
+                ['Artikelnummer', '14001'],
+                ['Größe',         '14 x 14 cm'],
+                ['Gewicht',       '90 g'],
+                ['Haltbarkeit',   '6 Monate'],
+                ['Lieferzeit',    '2 Wochen'],
+                ['Verpackungseinheit', '50 Stück']
+            ]
+        },
+        '16': {
+            title: 'Lebkuchenherz\nmit essbarem Logo',
+            img:   'event/Bild3.png',
+            specs: [
+                ['Artikelnummer', '16001'],
+                ['Größe',         '16 x 16 cm'],
+                ['Gewicht',       '120 g'],
+                ['Haltbarkeit',   '6 Monate'],
+                ['Lieferzeit',    '2 Wochen'],
+                ['Verpackungseinheit', '20 Stück']
+            ]
+        },
+        '20': {
+            title: 'Lebkuchenherz',
+            img:   'event/Bild4.png',
+            specs: [
+                ['Artikelnummer', '20001'],
+                ['Größe',         '20 x 19 cm'],
+                ['Gewicht',       '180 g'],
+                ['Haltbarkeit',   '6 Monate'],
+                ['Lieferzeit',    '2 Wochen'],
+                ['Verpackungseinheit', '20 Stück']
+            ]
+        },
+        '24': {
+            title: 'Lebkuchenherz\nmit essbarem Logo',
+            img:   'event/Bild5.png',
+            specs: [
+                ['Artikelnummer', '24001'],
+                ['Größe',         '24 x 23 cm'],
+                ['Gewicht',       '270 g'],
+                ['Haltbarkeit',   '6 Monate'],
+                ['Lieferzeit',    '2 Wochen'],
+                ['Verpackungseinheit', '20 Stück']
+            ]
+        }
+    };
+
+    const id = new URLSearchParams(window.location.search).get('id') || '10';
+    const p  = products[id] || products['10'];
+
+    document.title = 'Woletz Lebukchen Manufaktur';
+
+    const img = document.getElementById('prod-img');
+    img.src = p.img;
+    img.alt = p.title.replace('\n', ' ');
+
+    document.getElementById('prod-title').style.whiteSpace = 'pre-line';
+    document.getElementById('prod-title').textContent = p.title;
+
+    const table = document.getElementById('prod-table');
+    table.innerHTML = p.specs.map(([label, value]) =>
+        `<tr><td>${label}</td><td>${value}</td></tr>`
+    ).join('');
+
+    // Nav scroll shadow
+    const nav = document.querySelector('nav');
+    window.addEventListener('scroll', () => {
+        nav.style.boxShadow = window.scrollY > 40
+            ? '0 3px 20px rgba(0,0,0,0.6)'
+            : '0 2px 12px rgba(0,0,0,0.5)';
+    }, { passive: true });
+</script>
+
+</body>
+</html>

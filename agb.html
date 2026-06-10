@@ -3,123 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AGB – Lebkuchenmanufaktur Woletz</title>
+    <title>Woletz Lebkuchen Manufaktur</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Open+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 
     <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --amber: #B87820;
-            --text-dark: #2B1207;
-            --text-mid: #5C3010;
-            --cream: #FBF5E8;
-        }
-
-        html { scroll-behavior: smooth; }
-
-        body {
-            font-family: 'Open Sans', sans-serif;
-            color: var(--text-dark);
-            background: #EDEAE3;
-            overflow-x: hidden;
-        }
-
-        /* ── NAV ── */
-        nav {
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 200;
-            height: 68px;
-            display: flex;
-            align-items: stretch;
-            background-color: #3C1D0A;
-            background-image:
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
-                    transparent      1px, transparent      7px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
-                    transparent      1px, transparent      7px
-                ),
-                linear-gradient(to right,
-                    #180804 0%,
-                    #3C1C09 20%,
-                    #6B3212 50%,
-                    #3C1C09 80%,
-                    #180804 100%
-                );
-            box-shadow: 0 3px 16px rgba(0,0,0,0.55);
-        }
-
-        nav::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(180deg,
-                #9A6018 0%,
-                #D4A840 35%,
-                #EDD5A0 55%,
-                #EDD5A0 100%
-            );
-            pointer-events: none;
-        }
-
-        .nav-inner {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .nav-brand {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            text-decoration: none;
-        }
-
-        .nav-brand img {
-            height: 42px;
-            width: auto;
-            flex-shrink: 0;
-        }
-
-        .nav-brand-name {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.15rem;
-            font-weight: 400;
-            color: #E8D0A0;
-            letter-spacing: 0.03em;
-            white-space: nowrap;
-        }
-
-        .nav-links {
-            list-style: none;
-            display: flex;
-            gap: 2.8rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            font-family: 'Playfair Display', serif;
-            font-size: 0.95rem;
-            font-weight: 400;
-            letter-spacing: 0.03em;
-            color: #E8D0A0;
-            transition: color 0.2s;
-        }
-
-        .nav-links a:hover { color: #F5E4BE; }
+        body { background: #EDEAE3; }
 
         /* ── CONTENT ── */
         .page-wrap {
@@ -198,78 +89,8 @@
 
         .agb-section p:last-child { margin-bottom: 0; }
 
-        /* ── FOOTER ── */
-        footer {
-            position: relative;
-            background-color: #3C1D0A;
-            background-image:
-                repeating-linear-gradient(
-                    45deg,
-                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
-                    transparent      1px, transparent      7px
-                ),
-                repeating-linear-gradient(
-                    -45deg,
-                    rgba(0,0,0,0.18) 0px, rgba(0,0,0,0.18) 1px,
-                    transparent      1px, transparent      7px
-                ),
-                linear-gradient(to right,
-                    #180804 0%,
-                    #3C1C09 20%,
-                    #6B3212 50%,
-                    #3C1C09 80%,
-                    #180804 100%
-                );
-            box-shadow: 0 -3px 16px rgba(0,0,0,0.45);
-            padding: 2.5rem 3rem;
-        }
-
-        footer::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 4px;
-            background: linear-gradient(180deg,
-                #EDD5A0 0%,
-                #EDD5A0 45%,
-                #D4A840 65%,
-                #9A6018 100%
-            );
-            pointer-events: none;
-        }
-
-        .footer-bottom {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .footer-nav {
-            list-style: none;
-            display: flex;
-            gap: 2.2rem;
-        }
-
-        .footer-nav a {
-            font-family: 'Playfair Display', serif;
-            font-size: 0.9rem;
-            color: #E8D0A0;
-            text-decoration: none;
-            letter-spacing: 0.03em;
-            transition: color 0.2s;
-        }
-
-        .footer-nav a:hover { color: #F5E4BE; }
-
         @media (max-width: 720px) {
-            .nav-inner { padding: 0 1.5rem; }
-            .nav-links { gap: 1.4rem; }
             .agb-body { padding: 3rem 1.8rem 4rem; }
-            .footer-bottom { flex-direction: column; gap: 0.8rem; text-align: center; }
-        }
-
-        @media (max-width: 520px) {
-            .nav-brand-name { font-size: 0.82rem; }
         }
     </style>
 </head>
