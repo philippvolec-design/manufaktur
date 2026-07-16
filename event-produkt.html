@@ -29,8 +29,14 @@
         }
 
         /* Linke Seite: Bild-Kachel */
-        .detail-img-wrap {
+        .detail-img-col {
             flex: 0 0 560px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .detail-img-wrap {
+            width: 100%;
             background: #efebea;
             border-radius: 40px;
             overflow: hidden;
@@ -46,6 +52,39 @@
             max-height: 100%;
             width: auto;
             height: auto;
+            object-fit: contain;
+            display: block;
+        }
+
+        /* Thumbnails */
+        .thumb-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+        }
+        .thumb {
+            width: 72px;
+            height: 72px;
+            flex: 0 0 72px;
+            background: #efebea;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            padding: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: border-color 0.15s ease;
+        }
+        .thumb:hover {
+            border-color: #C8A87A;
+        }
+        .thumb.active {
+            border-color: #5C2A0A;
+        }
+        .thumb img {
+            max-width: 100%;
+            max-height: 100%;
             object-fit: contain;
             display: block;
         }
@@ -131,8 +170,11 @@
 <!-- PRODUKT DETAIL -->
 <main>
     <div class="product-detail">
-        <div class="detail-img-wrap">
-            <img id="prod-img" src="" alt="">
+        <div class="detail-img-col">
+            <div class="detail-img-wrap">
+                <img id="prod-img" src="" alt="">
+            </div>
+            <div class="thumb-row" id="thumb-row"></div>
         </div>
         <div class="detail-info">
             <h1 class="detail-title" id="prod-title"></h1>
@@ -159,9 +201,9 @@
     const products = {
         '10': {
             title: 'Lebkuchenherz\nmit essbarem Logo',
-            img:   'event/Bild1.png',
+            folder: 'event/10 cm',
+            images: ['Art. 10001.png', 'Art. 10002.PNG', 'Art. 10003.png', 'Art. 10004.png', 'Art. 10005.png', 'Art. 10006.png', 'Art. 10007.png', 'Art. 10008.png'],
             specs: [
-                ['Artikelnummer', '10001'],
                 ['Größe',         '10 x 10 cm'],
                 ['Gewicht',       '50 g'],
                 ['Haltbarkeit',   '6 Monate'],
@@ -171,9 +213,9 @@
         },
         '14': {
             title: 'Lebkuchenherz\nmit essbarem Logo',
-            img:   'event/Bild2.png',
+            folder: 'event/14 cm',
+            images: ['Art. 14001.png', 'Art. 14002.png', 'Art. 14003.png', 'Art. 14004.png', 'Art. 14005.png', 'Art. 14006.png', 'Art. 14007.png', 'Art. 14008.png'],
             specs: [
-                ['Artikelnummer', '14001'],
                 ['Größe',         '14 x 14 cm'],
                 ['Gewicht',       '90 g'],
                 ['Haltbarkeit',   '6 Monate'],
@@ -183,9 +225,9 @@
         },
         '16': {
             title: 'Lebkuchenherz\nmit essbarem Logo',
-            img:   'event/Bild3.png',
+            folder: 'event/16 cm',
+            images: ['Art. 16001.png', 'Art. 16002.png', 'Art. 16003.png', 'Art. 16004.png', 'Art. 16005.png', 'Art. 16006.png', 'Art. 16007.png', 'Art. 16008.png', 'Art. 16009.png'],
             specs: [
-                ['Artikelnummer', '16001'],
                 ['Größe',         '16 x 16 cm'],
                 ['Gewicht',       '120 g'],
                 ['Haltbarkeit',   '6 Monate'],
@@ -195,9 +237,9 @@
         },
         '20': {
             title: 'Lebkuchenherz',
-            img:   'event/Bild4.png',
+            folder: 'event/20 cm',
+            images: ['Art. 20001.png', 'Art. 20002.PNG', 'Art. 20003.png', 'Art. 20004.png', 'Art. 20005.png', 'Art. 20006.png', 'Art. 20007.png', 'Art. 20008.png', 'Art. 20009.png'],
             specs: [
-                ['Artikelnummer', '20001'],
                 ['Größe',         '20 x 19 cm'],
                 ['Gewicht',       '180 g'],
                 ['Haltbarkeit',   '6 Monate'],
@@ -207,9 +249,9 @@
         },
         '24': {
             title: 'Lebkuchenherz\nmit essbarem Logo',
-            img:   'event/Bild5.png',
+            folder: 'event/24 cm',
+            images: ['Art. 24001.png', 'Art. 24002.png', 'Art. 24003.png', 'Art. 24004.png', 'Art. 24006.png', 'Art. 24007.png', 'Art. 24008.png', 'Art. 24009.png'],
             specs: [
-                ['Artikelnummer', '24001'],
                 ['Größe',         '24 x 23 cm'],
                 ['Gewicht',       '270 g'],
                 ['Haltbarkeit',   '6 Monate'],
@@ -225,16 +267,41 @@
     document.title = 'Woletz Lebukchen Manufaktur';
 
     const img = document.getElementById('prod-img');
-    img.src = p.img;
-    img.alt = p.title.replace('\n', ' ');
+    const table = document.getElementById('prod-table');
+    const thumbRow = document.getElementById('thumb-row');
+    const altText = p.title.replace('\n', ' ');
 
     document.getElementById('prod-title').style.whiteSpace = 'pre-line';
     document.getElementById('prod-title').textContent = p.title;
 
-    const table = document.getElementById('prod-table');
-    table.innerHTML = p.specs.map(([label, value]) =>
-        `<tr><td>${label}</td><td>${value}</td></tr>`
+    function articleNumber(filename) {
+        const match = filename.match(/Art\.\s*(\d+)/i);
+        return match ? match[1] : '';
+    }
+
+    function selectImage(index) {
+        const file = p.images[index];
+        img.src = `${p.folder}/${file}`;
+        img.alt = altText;
+
+        thumbRow.querySelectorAll('.thumb').forEach((el, i) => {
+            el.classList.toggle('active', i === index);
+        });
+
+        const specs = [['Artikelnummer', articleNumber(file)], ...p.specs];
+        table.innerHTML = specs.map(([label, value]) =>
+            `<tr><td>${label}</td><td>${value}</td></tr>`
+        ).join('');
+    }
+
+    thumbRow.innerHTML = p.images.map((file, i) =>
+        `<div class="thumb" data-index="${i}"><img src="${p.folder}/${file}" alt="${altText} Foto ${i + 1}"></div>`
     ).join('');
+    thumbRow.querySelectorAll('.thumb').forEach(el => {
+        el.addEventListener('click', () => selectImage(Number(el.dataset.index)));
+    });
+
+    selectImage(0);
 
     // Nav scroll shadow
     const nav = document.querySelector('nav');
