@@ -261,6 +261,21 @@
         }
     };
 
+    // Abweichende Titel einzelner Artikel (sonst gilt der Titel der Größe)
+    const articleTitles = {
+        '10002': 'Lebkuchenherz',
+        '10007': 'Lebkuchenherz',
+        '14002': 'Lebkuchenherz',
+        '16002': 'Lebkuchenherz',
+        '16004': 'Lebkuchenherz',
+        '16009': 'Lebkuchenherz\nmit Siebdruck',
+        '20001': 'Lebkuchenherz\nmit essbarem Logo',
+        '20003': 'Lebkuchenherz\nmit essbarem Logo',
+        '20005': 'Lebkuchenherz\nmit essbarem Logo',
+        '20006': 'Lebkuchenherz\nmit essbarem Logo',
+        '20009': 'Lebkuchenherz\nmit essbarem Logo'
+    };
+
     const id = new URLSearchParams(window.location.search).get('id') || '10';
     const p  = products[id] || products['10'];
 
@@ -271,8 +286,9 @@
     const thumbRow = document.getElementById('thumb-row');
     const altText = p.title.replace('\n', ' ');
 
-    document.getElementById('prod-title').style.whiteSpace = 'pre-line';
-    document.getElementById('prod-title').textContent = p.title;
+    const titleEl = document.getElementById('prod-title');
+    titleEl.style.whiteSpace = 'pre-line';
+    titleEl.textContent = p.title;
 
     function articleNumber(filename) {
         const match = filename.match(/Art\.\s*(\d+)/i);
@@ -281,8 +297,10 @@
 
     function selectImage(index) {
         const file = p.images[index];
+        const title = articleTitles[articleNumber(file)] || p.title;
+        titleEl.textContent = title;
         img.src = `${p.folder}/${file}`;
-        img.alt = altText;
+        img.alt = title.replace('\n', ' ');
 
         thumbRow.querySelectorAll('.thumb').forEach((el, i) => {
             el.classList.toggle('active', i === index);
